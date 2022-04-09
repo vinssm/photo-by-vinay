@@ -1,6 +1,6 @@
 // import {  Divider } from "@material-ui/core";
 import React from "react";
-import { Typography, AppBar, Toolbar, Container } from "@material-ui/core";
+import { Typography, AppBar, Toolbar, Container, Tab, Tabs } from "@material-ui/core";
 import HomeGallery from './HomeGallery';
 // import Photography from '../assets/images/Photography.jpg'
 
@@ -11,6 +11,14 @@ const App = () => {
         <AppBar>
           <Toolbar>
             <Typography variant="h4">Photo by Vinay</Typography>
+
+            <Tabs textColor="inherit" float="right">
+                <Tab label="About" />
+                <Tab label="Services" />
+                <Tab label="Gallery" />
+                <Tab label="Contact" />
+              </Tabs>
+
           </Toolbar>
         </AppBar>
 

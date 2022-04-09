@@ -79,21 +79,17 @@ const HomeGallery = () => {
         },
     ];
     return (
-        <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
-            <ImageListItem  style={{width: '100%', height:'100%', display:'flex' }}  >
-                {data.map((item, index) =>{
-                    return(
-                        // <ImageList  cols={4} key={index}> 
-                        //     <img src={item.imgSrc}  alt={item.title} />                          
-                        // </ImageList>
+        <ImageList sx={{ width: 500, height: 450 }} >
+            <ImageListItem  style={{width: '100%', height:'100%', position: 'absolute'}} cols={3} rowHeight={164}>
+                {data.map((item, index) =>{ 
+                    return(                        
                         <img
                             src={`${item.imgSrc}?w=164&fit=crop&auto=format`}
-                            srcSet={`${item.imgSrc}?w=164&fit=crop&auto=format&dpr=2 2x`}
+                            srcSet={`${item.imgSrc}?w=164&fit=crop&auto=format&dpr=3 3x`}
                             alt={item.title}
-                            loading="lazy"
-                        />
-                    )
-                })}
+                            loading="lazy"/>
+                        )
+                  })}
             </ImageListItem>
        </ImageList>
     )
