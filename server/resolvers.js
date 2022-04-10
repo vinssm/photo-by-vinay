@@ -47,6 +47,7 @@ const resolvers = {
            const token = jwt.sign({userId:user._id},JWT_SECRET)
            return {token}
          },
+        
     }
 }
 
