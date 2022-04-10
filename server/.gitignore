@@ -4,7 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
-
+fakedb.js
+clientQueries.txt
+.txt
 # testing
 /coverage
 
