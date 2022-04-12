@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.login-container{
+  max-width: 1600px !important;
+}
+
+.multi-container{
+  max-width: 400px !important;
+}
+
