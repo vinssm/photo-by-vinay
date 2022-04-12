@@ -11,10 +11,10 @@ function App() {
   return (
       <div>
           <NavBar />
-          {element}
-          <Container style={{"marginTop":"70px","textAlign":"center"}}>
+          <Container style={{"marginTop":"20px","textAlign":"center"}}>
               <Typography variant="h2">Photography Portfolio with React</Typography>         
           </Container>
+          {element}         
      </div>
   )
   
