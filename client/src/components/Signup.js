@@ -22,7 +22,7 @@ export default function Signup() {
   
   return (
     <div className='container login-container' maxWidth="lg">
-      <h5>Signup</h5>
+      <h4 className="center padTop">Signup Form</h4>
 
       <form onSubmit={(event)=>handleSubmit(event)}>
               <input
@@ -30,7 +30,7 @@ export default function Signup() {
                 type="text"   
                 placeholder="First Name"
                 name="firstName"                             
-                id="email"
+                id="firstName"
                 // value={email}
                 onChange={(event)=>handleChange(event)}
                 required
@@ -40,7 +40,7 @@ export default function Signup() {
                 type="text"   
                 placeholder="Last Name"
                 name="lastName"                             
-                id="email"
+                id="lastName"
                 // value={email}
                 onChange={(event)=>handleChange(event)}
                 required
@@ -58,9 +58,9 @@ export default function Signup() {
               <input
                 // className="form-input"
                 type="password"  
-                placeholder="Your email"
+                placeholder="Your password"
                 name="password"                              
-                id="email"
+                id="password"
                 // value={password}
                 onChange={(event)=>handleChange(event)}
                 required
