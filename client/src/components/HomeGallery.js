@@ -84,10 +84,10 @@ const HomeGallery = () => {
     ];
     return (
         <ImageList sx={{ width: 500, height: 450 }} >
-            <ImageListItem  style={{width: '100%', height:'100%', position: 'absolute', left:'50px' }} cols={3} rowHeight={164}>
+            <ImageListItem  style={{width: '100%', height:'100%', position: 'absolute'}} cols={3}>
                 {data.map((item, index) =>{ 
                     return(                        
-                        <img
+                        <img className="img"
                             src={`${item.imgSrc}?w=164&fit=crop&auto=format`}
                             srcSet={`${item.imgSrc}?w=164&fit=crop&auto=format&dpr=3 3x`}
                             alt={item.title}

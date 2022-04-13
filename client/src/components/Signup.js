@@ -1,12 +1,15 @@
+import { useMutation } from "@apollo/client";
 import React, {useState} from "react";
+import { SIGNUP_USER } from "../utils/mutations";
 
 export default function Signup() {
-
   const [formState, setFormState] = useState({});
-  // const [email,setEmail] = useState("")
-  // const [password,setPassword] = useState("") 
-  const handleChange = (event)=>{
-    // const { name, value } = event.target;
+  const [signupUser,{data,loading,error}]= useMutation(SIGNUP_USER)
+
+  if(loading) return <h1>Loading</h1>
+
+
+  const handleChange = (event)=>{    
     setFormState({
       ...formState,
       [event.target.name]: event.target.value
@@ -17,12 +20,26 @@ export default function Signup() {
   const handleSubmit = (event)=>{
     event.preventDefault()
     console.log(formState)
+    signupUser({
+        variables:{
+            userNew:formState
+        }
+    })
   }
  
   
   return (
-    <div className='container login-container' maxWidth="lg">
+    <div className='container login-container'>
       <h4 className="center padTop">Signup Form</h4>
+      {
+        error && 
+        <div className="red card-panel"> {error.message} </div>
+      }
+
+      {
+         data && data.user && 
+         <div className="green card-panel"> {data.user.firstName} Signup is Successfull</div>
+      }
 
       <form onSubmit={(event)=>handleSubmit(event)}>
               <input
