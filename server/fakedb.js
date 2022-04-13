@@ -15,7 +15,7 @@ export const users = [
    },
 ]
 
-export const quotes = [
+export const comments = [
     {
      name:"My code is not perfect",
      by:"32145"

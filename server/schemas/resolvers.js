@@ -1,5 +1,5 @@
 
-import {quotes, users} from '../fakedb.js'
+import {comments, users} from '../fakedb.js'
 import {randomBytes} from 'crypto'
 import mongoose from 'mongoose'
 
@@ -8,17 +8,17 @@ import jwt from 'jsonwebtoken'
 import { JWT_SECRET } from '../config/connection.js'
 
 const User = mongoose.model("User")
-const Quote = mongoose.model("Quote")
+const Comment = mongoose.model("Comment")
 
 const resolvers = {
     Query:{
         users:()=>users,
         user:(_,{_id})=>users.find(user=>user._id == _id),
-        quotes:()=>quotes,
-        iquote:(_,{by})=>quotes.filter(quote=>quote.by == by)      
+        comments:()=>comments,
+        icomment:(_,{by})=>comments.filter(comment=>comment.by == by)      
     },
     User:{
-        quotes:(ur)=>quotes.filter(quote=>quote.by == ur._id)
+        comments:(ur)=>comments.filter(comment=>comment.by == ur._id)
     },
     Mutation:{
         signupUser:async (_,{userNew})=>{
@@ -49,15 +49,15 @@ const resolvers = {
            const token = jwt.sign({userId:user._id},JWT_SECRET)
            return {token}
          },
-         createQuote:async (_,{name},{userId})=>{
+         createComment:async (_,{name},{userId})=>{
              //
              if(userId) throw new Error("User must be logged in please check")
-             const newQuote = new Quote({
+             const newComment = new Comment({
                  name,
                  by:userId
              })
-             await newQuote.save()
-             return "Awesome! your Quote has been saved successfully"
+             await newComment.save()
+             return "Awesome! your comment has been saved successfully"
          }
     }
 }

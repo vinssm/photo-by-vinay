@@ -1,4 +1,6 @@
-const User = require('./User');
-const Thought = require('./Quote');
+import User from './User';
+import comments from './Comments';
 
-module.exports = { User, Quote };
+export default { User, comments };
+
+

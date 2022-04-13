@@ -20,7 +20,7 @@ mongoose.connection.on("error",(err)=>{
 })
 
 //import models goes here
-import './models/Quotes.js'
+import './models/Comments.js'
 import './models/User.js'
 
 import resolvers from './schemas/resolvers.js'

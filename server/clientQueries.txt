@@ -22,7 +22,10 @@ query getUserById{
 query getAllQuotes{
   quotes{
     name
-    by
+    by{
+      _id
+      firstName
+    }
   }
 }
 
