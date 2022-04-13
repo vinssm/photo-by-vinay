@@ -8,7 +8,6 @@ type Query{
    comments:[Comment]
    icomment(by:ID!):[Comment]
 }
-
 type User{
     _id:ID!
     firstName:String!
