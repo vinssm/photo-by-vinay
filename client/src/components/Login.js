@@ -1,28 +1,45 @@
+import { useMutation } from "@apollo/client";
 import React, {useState} from "react";
+import {useNavigate} from 'react-router-dom'
+import { LOGIN_USER } from "../utils/mutations";
 
 export default function Login() {
+  const navigate = useNavigate()
 
   const [formState, setFormState] = useState({});
-  // const [email,setEmail] = useState("")
-  // const [password,setPassword] = useState("") 
+  const [signinUser,{data,loading,error}] = useMutation(LOGIN_USER)
+
+  if(loading) return <h1>Loading</h1>
+  if(data){
+    localStorage.setItem("token",data.user.token)
+    navigate('/')
+  }
+
   const handleChange = (event)=>{
-    // const { name, value } = event.target;
     setFormState({
       ...formState,
       [event.target.name]: event.target.value
     })
-    console.log(formState)
   }
 
   const handleSubmit = (event)=>{
     event.preventDefault()
-    console.log(formState)
+    signinUser({
+      variables:{
+          userSignin:formState
+      }
+    })
   }
  
   
   return (
-    <div className='container login-container' maxWidth="lg">
+    <div className='container login-container'>
       <h4 className="center padTop">User login</h4>
+
+      {
+        error && 
+        <div className="red card-panel"> {error.message} </div>
+      }
 
       <form onSubmit={(event)=>handleSubmit(event)}>
               <input
@@ -38,9 +55,9 @@ export default function Login() {
               <input
                 // className="form-input"
                 type="password"  
-                placeholder="Your email"
+                placeholder="password"
                 name="password"                              
-                id="email"
+                id="password"
                 // value={password}
                 onChange={(event)=>handleChange(event)}
                 required

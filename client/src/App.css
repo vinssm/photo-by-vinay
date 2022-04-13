@@ -45,11 +45,18 @@
   max-width: 400px !important;
 }
 
+.img{
+  padding-left: 20px !important;  
+}
 .center{
   text-align: center;
 }
 
 .padTop{
   padding-top: 30px;
+}
+
+.padLeft{
+  padding-left: 20px;
 }
 
