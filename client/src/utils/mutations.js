@@ -17,8 +17,8 @@ export const LOGIN_USER = gql`
 `;
 
 export const CREATE_COMMENT = gql`
-  mutation createComment{
-    quote:createComment(name:"This is a new Quote from the user login")
+  mutation createComment($name:String!){
+    comment:createComment(name:$name)
   }
 `;
 

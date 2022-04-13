@@ -19,7 +19,7 @@ mongoose.connection.on("error",(err)=>{
     console.log("error connecting",err)
 })
 
-//import models goes here
+//import or register models  here
 import './models/Comments.js'
 import './models/User.js'
 

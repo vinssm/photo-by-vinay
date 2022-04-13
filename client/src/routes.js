@@ -6,8 +6,7 @@ import Profile from './components/Profile';
 import Contact from './components/Contact';
 import Login from './components/Login';
 import Signup from './components/Signup';
-
-// import createComment from './components/createComment';
+import CreateComment from './components/CreateComment';
 
 
 export const routes = [
@@ -19,5 +18,5 @@ export const routes = [
     {path:"/Contact",element:<Contact />},
     {path:"/login",element:<Login />},
     {path:"/Signup",element:<Signup />},
-    // {path:"/createComment",element:<createComment />},
+    {path:"/CreateComment",element:<CreateComment />},
 ]
