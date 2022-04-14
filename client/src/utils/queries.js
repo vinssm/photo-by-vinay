@@ -9,3 +9,15 @@ query getAllComments{
   }
   `;
 
+  export const GET_MY_PROFILE = gql`
+  query getMyProfile{
+    user:myprofile{
+      firstName
+      lastName
+      email
+      comments{
+        name
+      }
+    }
+  }
+  `;
