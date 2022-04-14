@@ -1,4 +1,4 @@
-import { ApolloServer, gql} from "apollo-server"
+import { ApolloServer} from "apollo-server"
 import {ApolloServerPluginLandingPageGraphQLPlayground} from "apollo-server-core"
 import typeDefs from './schemas/typeDefs.js'
 import jwt from 'jsonwebtoken'
