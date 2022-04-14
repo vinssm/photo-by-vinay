@@ -13,7 +13,7 @@ export default function NavBar() {
           token ?
           <>
               <li><Link to="/profile">Profile</Link></li> 
-              <li><Link to="/CreateComment">Comments</Link></li>
+              <li><Link to="/CreateComment">CreateComment</Link></li>
               <li><button className='red btn' onClick={()=>{
                 localStorage.removeItem("token")
                 navigate('/Login')}}>Logout</button></li>   
