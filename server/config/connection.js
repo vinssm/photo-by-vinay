@@ -1,11 +1,2 @@
-const mongoose = require('mongoose');
-
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/mernshopping', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false
-});
-
-
-module.exports = mongoose.connection;
+export const MONGO_URI = "mongodb+srv://vinay:Vinay1234@cluster0.lkshf.mongodb.net/graphqldb?retryWrites=true&w=majority"
+export const JWT_SECRET = "Vinay1234"
