@@ -1,7 +1,7 @@
 {
-  "name": "mern-shopping",
+  "name": "photo",
   "version": "1.0.0",
-  "description": "",
+  "description": "Photo-by-Vinay",
   "main": "server/server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -12,12 +12,20 @@
     "build": "cd client && npm run build"
   },
   "keywords": [],
-  "author": "",
+  "author": "Vinay",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.3.0"
   },
   "dependencies": {
     "if-env": "^1.0.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinssm/photo-by-vinay.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vinssm/photo-by-vinay/issues"
+  },
+  "homepage": "https://github.com/vinssm/photo-by-vinay#readme"
 }
