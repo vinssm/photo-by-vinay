@@ -47,7 +47,7 @@ const resolvers = {
            if(!doMatch){
                throw new Error("email or password are invalid")  
            }
-           const token = jwt.sign({userId:user._id},process.env.JWT_SECRET)
+           const token = jwt.sign({userId:user._id},JWT_SECRET)
            return {token}
          },
          createComment:async (_,{name},{userId})=>{
