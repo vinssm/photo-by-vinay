@@ -1,4 +1,4 @@
-import {gql} from "apollo-server"
+import {gql} from "apollo-server-express"
 
 
 const typeDefs = gql`
@@ -7,6 +7,7 @@ type Query{
    user(_id:ID!):User
    comments:[Comment]
    icomment(by:ID!):[Comment]
+   myprofile:User
 }
 type User{
     _id:ID!

@@ -1,2 +1,11 @@
-export const MONGO_URI = "mongodb+srv://vinay:Vinay1234@cluster0.lkshf.mongodb.net/graphqldb?retryWrites=true&w=majority"
-export const JWT_SECRET = "Vinay1234"
+const mongoose = require('mongoose');
+
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost:27017/Photo-by-Vinay',
+  {
+    useNewUrlParser: true, 
+    useUnifiedTopology: true,
+  }
+);
+
+module.exports = mongoose.connection;

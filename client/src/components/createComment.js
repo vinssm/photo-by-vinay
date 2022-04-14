@@ -1,13 +1,13 @@
 import { useMutation } from '@apollo/client'
 import React,{useState} from 'react'
 import { CREATE_COMMENT } from '../utils/mutations'
-import {GET_ALL_Comments} from '../utils/queries'
+
 
 export default function Comment() {
     const [comment,setComment] = useState("")
     const [createComment, {loading,error,data}] =useMutation(CREATE_COMMENT,{
         refetchQueries:[
-           GET_ALL_Comments, 'getAllComments' ]
+           'getAllComments','getMyProfile']
     })
     const handleSubmit = (e) =>{
         e.preventDefault()
