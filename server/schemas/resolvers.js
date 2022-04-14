@@ -1,21 +1,24 @@
 
-import {comments, users} from '../fakedb.js'
 import {randomBytes} from 'crypto'
 import mongoose from 'mongoose'
 
 import bcrypt from "bcryptjs"
 import jwt from 'jsonwebtoken'
-import { JWT_SECRET } from '../config/connection.js'
+// import { JWT_SECRET } from '../config/connection.js'
 
 const User = mongoose.model("User")
 const Comment = mongoose.model("Comment")
 
 const resolvers = {
     Query:{
-        users:()=>users,
-        user:(_,{_id})=>users.find(user=>user._id == _id),
-        comments:()=>comments,
-        icomment:(_,{by})=>comments.filter(comment=>comment.by == by)      
+        users:async ()=> await User.find({}),
+        user:async (_,{_id})=> await User.findOne({_id}),
+        comments:async ()=> await Comment.find({}).populate("by","_id firstName"),
+        icomment:async (_,{by})=> await Comment.find({by}),
+        myprofile:async (_,args,{userId})=>{
+            if(!userId) throw new Error("User must be logged in please check")
+           return await User.findOne({_id:userId})
+        }  
     },
     User:{
         comments:(ur)=>comments.filter(comment=>comment.by == ur._id)
@@ -32,9 +35,8 @@ const resolvers = {
             ...userNew,
             password:hashedPassword
        })
-
          return await newUser.save()
-        },
+    },
         signinUser:async (_,{userSignin})=>{
             //User Signing In
            const user = await User.findOne({email:userSignin.email})
@@ -45,13 +47,12 @@ const resolvers = {
            if(!doMatch){
                throw new Error("email or password are invalid")  
            }
-
-           const token = jwt.sign({userId:user._id},JWT_SECRET)
+           const token = jwt.sign({userId:user._id},process.env.JWT_SECRET)
            return {token}
          },
          createComment:async (_,{name},{userId})=>{
              //
-             if(userId) throw new Error("User must be logged in please check")
+             if(!userId) throw new Error("User must be logged in please check")
              const newComment = new Comment({
                  name,
                  by:userId
