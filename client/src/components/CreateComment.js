@@ -45,7 +45,6 @@ export default function Comment() {
             <button className='btn'>Create</button>
         </form>
     </div>
-  )
-  
+  )  
 }
 
