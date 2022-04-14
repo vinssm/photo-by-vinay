@@ -1,13 +1,13 @@
-import { ApolloServer} from "apollo-server-express"
+import { ApolloServer} from "apollo-server-express";
 import {ApolloServerPluginLandingPageGraphQLPlayground,ApolloServerPluginDrainHttpServer,
-    ApolloServerPluginLandingPageDisabled} from "apollo-server-core"
-import typeDefs from './schemas/typeDefs.js'
-import jwt from 'jsonwebtoken'
-import mongoose from "mongoose"
-import dotenv from 'dotenv'
-import express from 'express'
-import http from 'http'
-import path from 'path'
+    ApolloServerPluginLandingPageDisabled} from "apollo-server-core";
+import typeDefs from './schemas/typeDefs.js';
+import jwt from 'jsonwebtoken';
+import mongoose from "mongoose";
+import dotenv from 'dotenv';
+import express from 'express';
+import http from 'http';
+import path from 'path';
 
 
 const port = process.env.PORT || 4000;
@@ -58,19 +58,20 @@ const server = new ApolloServer({
     ]
 })
 
-// if(process.env.NODE_ENV=="production"){
+if(process.env.NODE_ENV=="production"){
     app.use(express.static('client/build'))
     app.get("*",(req,res)=>{
         res.sendFile(path.resolve(__dirname,'client','build','index.html'))
     })
-    __dirname = path.resolve(path.dirname(''));
-// }
+}
 
 await server.start();
 server.applyMiddleware({
     app,
     path:'graphql'
 });
+
+
 
 // The `listen` method launches a web server.
 httpServer.listen({port},()=>{
