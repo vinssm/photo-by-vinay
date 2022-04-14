@@ -45,6 +45,5 @@ export default function CreateComment() {
             <button className='btn'>Create</button>
         </form>
     </div>
-  )  
+  ) 
 }
-
