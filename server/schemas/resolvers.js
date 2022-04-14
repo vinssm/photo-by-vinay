@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 
 import bcrypt from "bcryptjs"
 import jwt from 'jsonwebtoken'
-// import { JWT_SECRET } from '../config/connection.js'
+import { JWT_SECRET } from '../config/connection.js'
 
 const User = mongoose.model("User")
 const Comment = mongoose.model("Comment")
@@ -47,7 +47,7 @@ const resolvers = {
            if(!doMatch){
                throw new Error("email or password are invalid")  
            }
-           const token = jwt.sign({userId:user._id},process.env.JWT_SECRET)
+           const token = jwt.sign({userId:user._id},JWT_SECRET)
            return {token}
          },
          createComment:async (_,{name},{userId})=>{

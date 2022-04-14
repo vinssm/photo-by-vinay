@@ -3,16 +3,16 @@ import React,{useState} from 'react'
 import { CREATE_COMMENT } from '../utils/mutations'
 
 
-export default function Comment() {
+export default function CreateComment() {
     const [comment,setComment] = useState("")
-    const [createComment, {loading,error,data}] =useMutation(CREATE_COMMENT,{
+    const [CreateComment, {loading,error,data}] =useMutation(CREATE_COMMENT,{
         refetchQueries:[
            'getAllComments','getMyProfile']
     })
     const handleSubmit = (e) =>{
         e.preventDefault()
         console.log(comment)
-        createComment({
+        CreateComment({
             variables:{
               name:comment
             }
@@ -46,6 +46,6 @@ export default function Comment() {
         </form>
     </div>
   )
-  
+
 }
 
