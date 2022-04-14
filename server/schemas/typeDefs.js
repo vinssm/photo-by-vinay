@@ -1,4 +1,4 @@
-import {gql} from "apollo-server-express"
+const { gql } = require('apollo-server-express');
 
 
 const typeDefs = gql`
@@ -26,7 +26,13 @@ type Token{
     token:String!
 }
 
+type Auth {
+    token: ID
+    user: User
+  }
+
 type Mutation{
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     signupUser(userNew:UserInput!):User
     signinUser(userSignin:UserSigninInput!):Token
     createComment(name:String!):String
@@ -42,6 +48,6 @@ input UserSigninInput{
     email:String!
     password:String!
 }
-`
+`;
 
-export default typeDefs
+module.exports = typeDefs;

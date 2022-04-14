@@ -1,6 +1,6 @@
-import User from './User';
-import comments from './Comments';
+const User = require('./User');
+const comments = require('./Comments');
 
-export default { User, comments };
+module.exports = { User, comments };
 
 

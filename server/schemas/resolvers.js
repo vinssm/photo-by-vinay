@@ -1,12 +1,12 @@
 
-import {randomBytes} from 'crypto'
-import mongoose from 'mongoose'
+const { AuthenticationError } = require('apollo-server-express');
+const { User } = require('../models');
+const mongoose = require ('mongoose');
+const bcrypt  = require ("bcryptjs");
+const jwt = require ('jsonwebtoken');
 
-import bcrypt from "bcryptjs"
-import jwt from 'jsonwebtoken'
-import { JWT_SECRET } from '../config/connection.js'
 
-const User = mongoose.model("User")
+
 const Comment = mongoose.model("Comment")
 
 const resolvers = {
@@ -47,7 +47,7 @@ const resolvers = {
            if(!doMatch){
                throw new Error("email or password are invalid")  
            }
-           const token = jwt.sign({userId:user._id},JWT_SECRET)
+           const token = jwt.sign({userId:user._id},process.env.JWT_SECRET)
            return {token}
          },
          createComment:async (_,{name},{userId})=>{
@@ -63,4 +63,4 @@ const resolvers = {
     }
 }
 
-export default resolvers
+module.exports = resolvers;

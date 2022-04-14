@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
+
 const commentSchema = new mongoose.Schema({
     name:{
         type:String,
@@ -11,3 +12,4 @@ const commentSchema = new mongoose.Schema({
 })
 
 mongoose.model("Comment", commentSchema)
+

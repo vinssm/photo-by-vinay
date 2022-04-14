@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
+  "type": "commonjs",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -14,6 +14,7 @@
     "apollo-server": "^3.5.0",
     "apollo-server-core": "^3.5.0",
     "apollo-server-express": "^2.11.0",
+    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
@@ -21,12 +22,10 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.7"
   },
-    "engines": {
-      "node": "v16.14.1"
-    },
-    "devDependencies": {
-      "nodemon": "^2.0.2"
+  "engines": {
+    "node": "v16.14.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
-
 }
-
