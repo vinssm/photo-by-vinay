@@ -2,7 +2,7 @@
   "name": "photo",
   "version": "1.0.0",
   "engines": {
-    "node": "6.14.1"
+    "node": "12.11.1"
   },
   "description": "Photo-by-Vinay",
   "main": "server/server.js",
@@ -21,7 +21,10 @@
     "concurrently": "^7.1.0"
   },
   "dependencies": {
-    "if-env": "^1.0.4"
+    "apollo-server-express": "^2.11.0",
+    "dotenv": "^16.0.0",
+    "if-env": "^1.0.4",
+    "mongoose": "^5.9.7"
   },
   "repository": {
     "type": "git",
