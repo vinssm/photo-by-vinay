@@ -7,6 +7,7 @@ import Contact from './components/Contact';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import CreateComment from './components/CreateComment';
+import NotFound from './components/NotFound';
 
 
 export const routes = [
@@ -19,4 +20,5 @@ export const routes = [
     {path:"/login",element:<Login />},
     {path:"/Signup",element:<Signup />},
     {path:"/CreateComment",element:<CreateComment />},
+    {path:"*",element:<NotFound />},
 ]

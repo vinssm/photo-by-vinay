@@ -3,10 +3,11 @@ import {ApolloServerPluginLandingPageGraphQLPlayground,ApolloServerPluginDrainHt
     ApolloServerPluginLandingPageDisabled} from "apollo-server-core"
 import typeDefs from './schemas/typeDefs.js'
 import jwt from 'jsonwebtoken'
+import mongoose from "mongoose"
 import dotenv from 'dotenv'
 import express from 'express'
 import http from 'http'
-
+import path from 'path'
 
 
 const port = process.env.PORT || 4000;
@@ -16,7 +17,7 @@ if(process.env.NODE_ENV !=="production"){
     dotenv.config()
 }
 
-import mongoose from "mongoose"
+
 // import { JWT_SECRET, MONGO_URI } from "./config/connection.js"
 
 mongoose.connect(process.env.MONGO_URI,{
@@ -38,17 +39,18 @@ import './models/User.js'
 
 import resolvers from './schemas/resolvers.js'
 
+const context = ({req})=>{
+    const { authorization } = req.headers
+    if(authorization){
+        console.log(authorization)
+     const {userId}  = jwt.verify(authorization,proess.env.JWT_SECRET)
+     return {userId}
+    }
+}
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context:({req})=>{
-        const { authorization } = req.headers
-        if(authorization){
-            console.log(authorization)
-         const {userId}  = jwt.verify(authorization,proess.env.JWT_SECRET)
-         return {userId}
-        }
-    },
+    context,
     plugins:[
         ApolloServerPluginDrainHttpServer({httpServer}),
         process.env.NODE_ENV !=="production" ? ApolloServerPluginLandingPageGraphQLPlayground() :
@@ -56,16 +58,19 @@ const server = new ApolloServer({
     ]
 })
 
-app.get("/",(req,res)=>{
-    res.send("UNCC-BOOTCAMP!!!")
-})
+// if(process.env.NODE_ENV=="production"){
+    app.use(express.static('client/build'))
+    app.get("*",(req,res)=>{
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+    })
+    __dirname = path.resolve(path.dirname(''));
+// }
 
 await server.start();
 server.applyMiddleware({
     app,
     path:'graphql'
 });
-
 
 // The `listen` method launches a web server.
 httpServer.listen({port},()=>{
