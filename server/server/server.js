@@ -19,6 +19,16 @@ server.applyMiddleware({ app });
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.get("/",(req,res)=>{
+  res.send("UNCC BootCamp!!!")
+})
+
+await server.start();
+server.applyMiddleware({
+    app,
+    path:'/graphql'
+});
+
 // Serve up static assets
 app.use('/images', express.static(path.join(__dirname, '../client/images')));
 
