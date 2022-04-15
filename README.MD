@@ -29,8 +29,8 @@
 ## Github deployed Application
 https://github.com/vinssm/photo-by-vinay
 
-![Photo-by-Vinay] 
-(https://user-images.githubusercontent.com/26659001/163501605-c812b89d-ff52-4036-836b-35220445becf.jpg)
-(https://user-images.githubusercontent.com/26659001/163501608-ee4410d0-fa20-43e6-b593-3a8d5f08652c.jpg)
-(https://user-images.githubusercontent.com/26659001/163501615-ddb250a9-c0b4-4be1-8757-0c80b9a85d8e.jpg)
+![photobyvinay](https://user-images.githubusercontent.com/26659001/163501761-bb6b810e-e018-41b9-98b2-fd8a2dce3c8a.jpg)
+![photobyvinay1](https://user-images.githubusercontent.com/26659001/163501762-eba5101d-bdbc-4ac9-8dd7-aa8b18c44c4d.jpg)
+![photobyvinay2](https://user-images.githubusercontent.com/26659001/163501763-cecd118c-fb4f-4c08-8e38-4da950c5b860.jpg)
+
 
