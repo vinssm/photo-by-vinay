@@ -1,7 +1,6 @@
 {
   "name": "photo",
   "version": "1.0.0",
-  
   "description": "Photo-by-Vinay",
   "main": "server/server.js",
   "scripts": {
