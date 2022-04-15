@@ -1,9 +1,6 @@
 {
   "name": "photo",
   "version": "1.0.0",
-  "engines": {
-    "node": "v16.14.1"
-  },
   "description": "Photo-by-Vinay",
   "main": "server/server.js",
   "scripts": {
