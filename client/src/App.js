@@ -1,4 +1,5 @@
 import React from 'react';
+import App from './App';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import SearchComments from './pages/SearchComments';
 // import SavedComments from './pages/SavedComments';
@@ -10,7 +11,6 @@ import Profile from './pages/Profile.js';
 import Contact from './pages/Contact.js';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
-
 
 const client = new ApolloClient({
   request: (operation) => {

@@ -45,3 +45,12 @@ h6 {
   align-items: center;
   text-align: center;
 }
+
+@media screen and (min-width: 1024px) and (max-height: 1310px) {
+  /* Laptop */
+  .img{
+    width: 25%;
+    height: 25%;
+    padding-left: 10px !important; 
+  }
+}
