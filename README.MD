@@ -26,7 +26,7 @@
 ## Usage
  npm start
 
-## Github deployed App
+## Github deployed Application
 https://github.com/vinssm/photo-by-vinay
 
 ![Photo-by-Vinay] 
