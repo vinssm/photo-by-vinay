@@ -20,24 +20,11 @@ const AppNavbar = () => {
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto'>
-              <Nav.Link as={Link} to='/'>
-                Home
-              </Nav.Link>
-              <Nav.Link as={Link} to='/'>
-                About
-              </Nav.Link>
-              <Nav.Link as={Link} to='/'>
-                Services
-              </Nav.Link>
-              <Nav.Link as={Link} to='/'>
-                Profile
-              </Nav.Link>
-              <Nav.Link as={Link} to='/'>
-                Comment
-              </Nav.Link>
-              <Nav.Link as={Link} to='/'>
-                Contact
-              </Nav.Link>
+              <Nav.Link as={Link} to='/'>Home</Nav.Link>
+              <Nav.Link href="about">About</Nav.Link>
+              <Nav.Link href="services">Services</Nav.Link>
+              <Nav.Link href="profile">Profile</Nav.Link>
+              <Nav.Link href="contact">Contact</Nav.Link>
               {/* if user is logged in show saved comments and logout */}
               {Auth.loggedIn() ? (
                 <>

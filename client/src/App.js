@@ -1,8 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import SearchComments from './pages/SearchComments';
-import SavedComments from './pages/SavedComments';
+// import SearchComments from './pages/SearchComments';
+// import SavedComments from './pages/SavedComments';
 import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import About from './pages/About';
+import Services from './pages/Services';
+import Profile from './pages/Profile';
+import Contact from './pages/Contact';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 
@@ -21,14 +26,21 @@ const client = new ApolloClient({
 });
 
 function App() {
+
   return (
     <ApolloProvider client={client}>
     <Router>
       <>
         <Navbar />
-        <Switch>
-          <Route exact path='/Search' component={SearchComments} />
-          <Route exact path='/saved' component={SavedComments} />
+        <Switch> 
+          {/* <Route exact path='/Search' component={SearchComments} />
+          <Route exact path='/saved' component={SavedComments} /> */}
+          <Route exact path="/" component={Home} />
+          <Route exact path='/Home' component={Home} />
+          <Route exact path="/About" component={About} />
+          <Route exact path="/Services" component={Services} />
+          <Route exact path="/Profile" component={Profile} />
+          <Route exact path="/Contact" component={Contact} />
           <Route render={() => <h1 className='display-4'>Something went Wrong!</h1>} />
         </Switch>
       </>

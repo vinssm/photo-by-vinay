@@ -15,3 +15,33 @@ h6 {
   font-weight: 300;
   font-style: italic;
 }
+
+.img{
+  width: 300px;
+  padding-left: 20px !important; 
+}
+
+.center{
+  text-align: center;
+}
+
+.padTop{
+  padding-top: 30px;
+}
+
+.padLeft{
+  padding-left: 20px;
+}
+
+.fancy{
+  font-family: 'Raleway';
+  font-style: normal;
+  font-size: calc(30px);
+  color: black;
+  text-align: center;
+}
+
+.center{
+  align-items: center;
+  text-align: center;
+}
