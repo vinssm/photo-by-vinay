@@ -1,24 +1,40 @@
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import SearchComments from './pages/SearchComments';
+import SavedComments from './pages/SavedComments';
+import Navbar from './components/Navbar';
+import { ApolloProvider } from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost';
 
-import React from "react";
-import { Typography,Container} from "@material-ui/core";
-import './App.css'
-import NavBar from "./components/NavBar";
-import {routes} from "./routes";
-import {useRoutes} from 'react-router';
 
+const client = new ApolloClient({
+  request: (operation) => {
+    const token = localStorage.getItem('id_token');
+
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : '',
+      },
+    });
+  },
+  uri: '/graphql',
+});
 
 function App() {
-  const element = useRoutes(routes)
   return (
-      <div>
-          <NavBar />
-          <Container style={{"marginTop":"20px","textAlign":"center"}}>
-              <Typography variant="h2">Photography Portfolio with React</Typography>         
-          </Container>
-          {element}         
-     </div>
-  )
-  
+    <ApolloProvider client={client}>
+    <Router>
+      <>
+        <Navbar />
+        <Switch>
+          <Route exact path='/Search' component={SearchComments} />
+          <Route exact path='/saved' component={SavedComments} />
+          <Route render={() => <h1 className='display-4'>Something went Wrong!</h1>} />
+        </Switch>
+      </>
+    </Router>
+    </ApolloProvider>
+  );
 }
 
 export default App;

@@ -8,24 +8,20 @@
     "start:prod": "cd server && npm start",
     "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
-    "seed": "cd server && npm run seed",
-    "build": "cd client && npm run build"
-  },
-  "keywords": [],
-  "author": "Vinay",
-  "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^5.3.0",
-    "gh-pages": "^3.2.3"
-  },
-  "dependencies": {
-    "apollo-server-express": "^3.6.7",
-    "express": "^4.17.3",
-    "if-env": "^1.0.4"
+    "heroku-postbuild": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vinssm/photo-by-vinay.git"
+  },
+  "keywords": [],
+  "author": "Vinay",
+  "license": "ISC",
+  "dependencies": {
+    "if-env": "^1.0.4"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0"
   },
   "bugs": {
     "url": "https://github.com/vinssm/photo-by-vinay/issues"

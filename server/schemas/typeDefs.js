@@ -1,53 +1,49 @@
 const { gql } = require('apollo-server-express');
 
-
 const typeDefs = gql`
-type Query{
-   users: [User]
-   user(_id:ID!):User
-   comments:[Comment]
-   icomment(by:ID!):[Comment]
-   myprofile:User
-}
-type User{
-    _id:ID!
-    firstName:String!
-    lastName:String!
-    email:String!
-    password:String!
-    comments:[Comment]
-}
-type Comment{
-    name:String!
-    by:ID!
+type Mutation {
+  login(email: String!, password: String!): Auth
+  addUser(username: String!, email: String!, password: String!): Auth
+  saveComment(commentData: CommentInput!): User
+  removeComment(commentId: ID!): User
 }
 
-type Token{
-    token:String!
-}
+type User {
+    _id: ID!
+    username: String!
+    email: String
+    commentCount: Int
+    savedComments: [Comment]
+  }
 
-type Auth {
-    token: ID
+type Comment {
+  commentId: ID!
+    authors: [String]
+    description: String
+    image: String
+    link: String
+    title: String!
+  }
+
+input CommentInput {
+    authors: [String]
+    description: String!
+    commentId: String!
+    image: String
+    link: String
+    title: String!
+  }
+
+type Query {
+    me: User
+  }
+
+  type Auth {
+    token: ID!
     user: User
   }
 
-type Mutation{
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    signupUser(userNew:UserInput!):User
-    signinUser(userSignin:UserSigninInput!):Token
-    createComment(name:String!):String
-}
 
-input UserInput{
-    firstName:String!
-    lastName:String!
-    email:String!
-    password:String!
-}
-input UserSigninInput{
-    email:String!
-    password:String!
-}
 `;
 
 module.exports = typeDefs;

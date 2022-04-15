@@ -1,66 +1,70 @@
-
 const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models');
-const mongoose = require ('mongoose');
-const bcrypt  = require ("bcryptjs");
-const jwt = require ('jsonwebtoken');
-
-
-
-const Comment = mongoose.model("Comment")
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
-    Query:{
-        users:async ()=> await User.find({}),
-        user:async (_,{_id})=> await User.findOne({_id}),
-        comments:async ()=> await Comment.find({}).populate("by","_id firstName"),
-        icomment:async (_,{by})=> await Comment.find({by}),
-        myprofile:async (_,args,{userId})=>{
-            if(!userId) throw new Error("User must be logged in please check")
-           return await User.findOne({_id:userId})
-        }  
-    },
-    User:{
-        comments:(ur)=>comments.filter(comment=>comment.by == ur._id)
-    },
-    Mutation:{
-        signupUser:async (_,{userNew})=>{
-           const user = await User.findOne({email:userNew.email})
-           if(user){
-               throw new Error("User already exists with that email")
-           }
-       const hashedPassword = await bcrypt.hash(userNew.password,12)
+  Query: {
+    me: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id }).select('-__v -password');
 
-      const newUser = new User({
-            ...userNew,
-            password:hashedPassword
-       })
-         return await newUser.save()
+        return userData;
+      }
+
+      throw new AuthenticationError('Not logged in');
     },
-        signinUser:async (_,{userSignin})=>{
-            //User Signing In
-           const user = await User.findOne({email:userSignin.email})
-           if(!user){
-               throw new Error("User does not exist with that email")               
-           }
-           const doMatch = await bcrypt.compare(userSignin.password,user.password)
-           if(!doMatch){
-               throw new Error("email or password are invalid")  
-           }
-           const token = jwt.sign({userId:user._id},JWT_SECRET)
-           return {token}
-         },
-         createComment:async (_,{name},{userId})=>{
-             //
-             if(!userId) throw new Error("User must be logged in please check")
-             const newComment = new Comment({
-                 name,
-                 by:userId
-             })
-             await newComment.save()
-             return "Awesome! your comment has been saved successfully"
-         }
-    }
-}
+  },
+
+  Mutation: {
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
+
+      return { token, user };
+    },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const token = signToken(user);
+      return { token, user };
+    },
+    saveComment: async (parent, { commentData }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { commentComments: commentData } },
+          { new: true }
+        );
+
+        return updatedUser;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    removeComment: async (parent, { commentId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedComments: { commentId } } },
+          { new: true }
+        );
+
+        return updatedUser;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+  },
+};
 
 module.exports = resolvers;

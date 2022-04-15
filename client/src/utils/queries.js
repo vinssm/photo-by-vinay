@@ -1,23 +1,19 @@
-import { gql } from '@apollo/client';
+import gql from 'graphql-tag';
 
-export const GET_ALL_Comments = gql`
-query getAllComments{
-    comment{
-      name
-      by
-    }
-  }
-  `;
-
-  export const GET_MY_PROFILE = gql`
-  query getMyProfile{
-    user:myprofile{
-      firstName
-      lastName
+export const QUERY_ME = gql`
+  {
+    me {
+      _id
+      username
       email
-      comments{
-        name
+      savedComments {
+        bookId
+        authors
+        image
+        description
+        title
+        link
       }
     }
   }
-  `;
+`;
