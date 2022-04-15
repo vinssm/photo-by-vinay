@@ -1,7 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-// import SearchComments from './pages/SearchComments';
-// import SavedComments from './pages/SavedComments';
 import Navbar from './components/Navbar.js';
 import Home from './pages/Home.js';
 import About from './pages/About.js';
@@ -32,8 +30,6 @@ function App() {
       <>
         <Navbar />
         <Switch> 
-          {/* <Route exact path='/Search' component={SearchComments} />
-          <Route exact path='/saved' component={SavedComments} /> */}
           <Route exact path="/" component={Home} />
           <Route exact path='/Home' component={Home} />
           <Route exact path="/About" component={About} />
