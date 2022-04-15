@@ -12,10 +12,16 @@
 
 ## NPM Package Installation
 - npm install 
-- compression
 - express
 - mongoose
-- morgan
+- Apollo Client
+- Matrerial UI
+- REACT
+- Express
+- bcrypt
+- jsonwebtoken
+- JavaScript
+- Bootstrap
 
 ## Usage
  npm start
