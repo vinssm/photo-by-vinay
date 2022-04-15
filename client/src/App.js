@@ -2,12 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import SearchComments from './pages/SearchComments';
 // import SavedComments from './pages/SavedComments';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import About from './pages/About';
-import Services from './pages/Services';
-import Profile from './pages/Profile';
-import Contact from './pages/Contact';
+import Navbar from './components/Navbar.js';
+import Home from './pages/Home.js';
+import About from './pages/About.js';
+import Services from './pages/Services.js';
+import Profile from './pages/Profile.js';
+import Contact from './pages/Contact.js';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 
