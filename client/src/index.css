@@ -46,6 +46,15 @@ h6 {
   text-align: center;
 }
 
+.login-container{
+  max-width: 1600px !important;
+}
+
+.multi-container{
+  max-width: 400px !important;
+}
+
+
 @media screen and (min-width: 1024px) and (max-height: 1310px) {
   /* Laptop */
   .img{
