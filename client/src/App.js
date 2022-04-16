@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Navbar from './components/Navbar.js';
+import NavBar from './components/NavBar.js';
 import Home from './pages/Home.js';
 import About from './pages/About.js';
 import Services from './pages/Services.js';
@@ -28,7 +28,7 @@ function App() {
     <ApolloProvider client={client}>
     <Router>
       <>
-        <Navbar />
+        <NavBar />
         <Switch> 
           <Route exact path="/" component={Home} />
           <Route exact path='/Home' component={Home} />
