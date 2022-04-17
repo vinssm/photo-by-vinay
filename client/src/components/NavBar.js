@@ -20,8 +20,7 @@ const Navs= () => {
             <Nav className='ml-auto'>
               <Nav.Link as={Link} to='/'>Home</Nav.Link>
               <Nav.Link href="about">About</Nav.Link>
-              <Nav.Link href="services">Services</Nav.Link>
-              <Nav.Link href="profile">Profile</Nav.Link>
+              <Nav.Link href="services">Services</Nav.Link>             
               <Nav.Link href="contact">Contact</Nav.Link>
               <Nav.Link href="login">Login</Nav.Link>
               <Nav.Link href="signup">Signup</Nav.Link>
@@ -30,6 +29,7 @@ const Navs= () => {
                   <Nav.Link as={Link} to='/'>
                     Home
                   </Nav.Link>
+                  <Nav.Link href="profile">Profile</Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : ( <Nav.Link href="#">#</Nav.Link>)}
