@@ -1,9 +1,10 @@
 import React from 'react';
+import Auth from '../utils/auth';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
-// import Signup from '../pages/Signup';
+//import Signup from '../pages/Signup';
 // import Login from './pages/Login';
-// import Auth from '../utils/auth';
+
 
 const Navs= () => {
 
@@ -24,6 +25,14 @@ const Navs= () => {
               <Nav.Link href="contact">Contact</Nav.Link>
               <Nav.Link href="login">Login</Nav.Link>
               <Nav.Link href="signup">Signup</Nav.Link>
+              {Auth.loggedIn() ? (
+                <>
+                  <Nav.Link as={Link} to='/'>
+                    Home
+                  </Nav.Link>
+                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                </>
+              ) : ( <Nav.Link href="#">#</Nav.Link>)}
             </Nav>
           </Navbar.Collapse>
         </Container>

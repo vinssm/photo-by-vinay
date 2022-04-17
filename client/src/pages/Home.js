@@ -88,8 +88,8 @@ const HomeGallery = () => {
                 {data.map((item, index) =>{ 
                     return(                        
                         <img className="img"
-                            src={`${item.imgSrc}?w=164&fit=crop&auto=format`}
-                            srcSet={`${item.imgSrc}?w=164&fit=crop&auto=format&dpr=3 3x`}
+                            src={`${item.imgSrc}`}
+                            srcSet={`${item.imgSrc}`}
                             alt={item.title}
                             loading="lazy"/>
                         )

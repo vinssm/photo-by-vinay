@@ -1,75 +1,94 @@
-import { useMutation } from "@apollo/client";
-import { Typography, Container} from "@material-ui/core";
-import {Button} from 'react-bootstrap';
-import React, {useState} from "react";
-import {useNavigate} from 'react-router-dom'
-import { LOGIN_USER } from "../utils/mutations";
+import React, { useState, useEffect } from 'react';
+import { Form, Button, Alert } from 'react-bootstrap';
 
-export default function Login() {
-  const navigate = useNavigate()
+import { useMutation } from '@apollo/react-hooks';
+import { LOGIN_USER } from '../utils/mutations';
+import Auth from '../utils/auth';
 
-  const [formState, setFormState] = useState({});
-  const [signinUser,{data,loading,error}] = useMutation(LOGIN_USER)
+const Login = () => {
+  const [userFormData, setUserFormData] = useState({ email: '', password: '' });
+  const [validated] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [login, { error }] = useMutation(LOGIN_USER);
 
-  if(loading) return <h1>Loading</h1>
-  if(data){
-    localStorage.setItem("token",data.user.token)
-    navigate('/login')
-  }
+  useEffect(() => {
+    if (error) {
+      setShowAlert(true);
+    } else {
+      setShowAlert(false);
+    }
+  }, [error]);
 
-  const handleChange = (event)=>{
-    setFormState({
-      ...formState,
-      [event.target.name]: event.target.value
-    })
-  }
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
+  };
 
-  const handleSubmit = (event)=>{
-    event.preventDefault()
-    signinUser({
-      variables:{
-          userSignin:formState
-      }
-    })
-  }
- 
-  
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    // check if form has everything (as per react-bootstrap docs)
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    try {
+      const { data } = await login({
+        variables: { ...userFormData },
+      });
+
+      console.log(data);
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    }
+
+    // clear form values
+    setUserFormData({
+      email: '',
+      password: '',
+    });
+  };
+
   return (
-    <Container className="login-container center fancy">
-      <Typography className="center padTop fancy">User login</Typography>
+    <>
+      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+          Something went wrong with your login credentials!
+        </Alert>
+        <Form.Group>
+          <Form.Label htmlFor='email'>Email</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Your email'
+            name='email'
+            onChange={handleInputChange}
+            value={userFormData.email}
+            required
+          />
+          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+        </Form.Group>
 
-      {
-        error && 
-        <div className="red card-panel"> {error.message} </div>
-      }
+        <Form.Group>
+          <Form.Label htmlFor='password'>Password</Form.Label>
+          <Form.Control
+            type='password'
+            placeholder='Your password'
+            name='password'
+            onChange={handleInputChange}
+            value={userFormData.password}
+            required
+          />
+          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+        </Form.Group>
+        <Button disabled={!(userFormData.email && userFormData.password)} type='submit' variant='success'>
+          Submit
+        </Button>
+      </Form>
+    </>
+  );
+};
 
-      <form onSubmit={(event)=>handleSubmit(event)}>
-              <input
-                // className="form-input"
-                type="email"   
-                placeholder="Your email"
-                name="email"                             
-                id="email"
-                // value={email}
-                onChange={(event)=>handleChange(event)}
-                required
-              />
-              <input
-                // className="form-input"
-                type="password"  
-                placeholder="password"
-                name="password"                              
-                id="password"
-                // value={password}
-                onChange={(event)=>handleChange(event)}
-                required
-              />
-              <Button className="btn  btn-default" type="submit">
-                Login
-              </Button>
-            </form>
-
-    </Container>
-  )
-}
-
+export default Login;
